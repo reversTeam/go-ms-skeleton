@@ -126,6 +126,7 @@ service Example {
 ```
 
 We do there, the description of several endpoint grpc and http for your service.
+
 | GRPC   | HTTP VERBE | HTTP PATH     |
 |:-------|:-----------|:--------------|
 | List   | GET        | /example      |
