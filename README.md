@@ -1,5 +1,4 @@
-# GoMs Singleton
-
+# GoMs Skeleton
 This go framework is still under development and this mention will be withdrawn when I consider that the project has sufficient maturity to start being exploited by other people.
 
 ### Why this project?
