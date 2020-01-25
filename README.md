@@ -127,17 +127,33 @@ service Example {
 
 We do there, the description of several endpoint grpc and http for your service.
 | GRPC   | HTTP VERBE | HTTP PATH     |
-|:-------|------------|---------------|
+|:-------|:-----------|:--------------|
 | List   | GET        | /example      |
 | Create | POST       | /example      |
 | Get    | GET        | /example/{id} |
 | Update | PATCH      | /example/{id} |
 | Delete | DELETE     | /example/{id} |
 
+
+
 Now that we have finished the description of your proto, you can now start the generation of protobuf with the following command:
-```
+```bash
 make protogen
 ```
+
+If you have an error at this step, you may be missing one of the following dependencies:
+```bash
+brew install protobuf
+go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
+go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
+go get -u github.com/golang/protobuf/protoc-gen-go
+```
+
+As for launching the `make lint` command, you will need to install:
+```bash
+brew install golangci/tap/golangci-lint
+```
+
 
 Your file nomenclature should normally be this one now, we just generated the http handler, the entity structure and the swagger documentation.
 ```
