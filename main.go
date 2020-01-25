@@ -2,8 +2,8 @@ package main
 
 import (
 	"flag"
-	"github.com/reversTeam/go-ms/core"
 	"github.com/reversTeam/go-ms-skeleton/services/ping"
+	"github.com/reversTeam/go-ms/core"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"log"

@@ -2,8 +2,8 @@ package ping
 
 import (
 	"github.com/golang/protobuf/ptypes/empty"
-	"github.com/reversTeam/go-ms/core"
 	pb "github.com/reversTeam/go-ms-skeleton/services/ping/protobuf"
+	"github.com/reversTeam/go-ms/core"
 	"github.com/reversTeam/go-ms/services/goms"
 	ms "github.com/reversTeam/go-ms/services/goms/protobuf"
 	"golang.org/x/net/context"
