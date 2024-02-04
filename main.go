@@ -2,11 +2,12 @@ package main
 
 import (
 	"flag"
+	"log"
+
 	"github.com/reversTeam/go-ms-skeleton/services/ping"
 	"github.com/reversTeam/go-ms/core"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	"log"
 )
 
 const (
@@ -63,7 +64,7 @@ func main() {
 	httpServer := core.NewGoMsHttpServer(ctx, *httpHost, *httpPort, grpcServer)
 
 	// setup services
-	pingService := ping.NewService("ping")
+	pingService := ping.NewService("ping", core.ServiceConfig{})
 
 	// Register service to the grpc server
 	grpcServer.AddService(pingService)
