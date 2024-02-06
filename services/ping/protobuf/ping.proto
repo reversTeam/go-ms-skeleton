@@ -6,37 +6,37 @@ option go_package = "github.com/reversTeam/go-ms-skeleton/services/ping/protobuf
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
-import "github.com/reversTeam/go-ms/services/goms/protobuf/goms.proto";
+import "github.com/reversTeam/go-ms-tools/services/abs/protobuf/abs.proto";
 
 service Ping {
 
-	rpc List(google.protobuf.Empty) returns (goms.GoMsResponse) {
+	rpc List(google.protobuf.Empty) returns (abs.Response) {
 		option (google.api.http) = {
 			get: "/ping"
 		};
 	}
 
-	rpc Create(google.protobuf.Empty) returns (goms.GoMsResponse) {
+	rpc Create(google.protobuf.Empty) returns (abs.Response) {
 		option (google.api.http) = {
 			post: "/ping"
 			body: "*"
 		};
 	}
 
-	rpc Get(goms.GoMsEntityRequest) returns (goms.GoMsResponse) {
+	rpc Get(abs.EntityRequest) returns (abs.Response) {
 		option (google.api.http) = {
 			get: "/ping/{id}"
 		};
 	}
 
-	rpc Update(goms.GoMsEntityRequest) returns (goms.GoMsResponse) {
+	rpc Update(abs.EntityRequest) returns (abs.Response) {
 		option (google.api.http) = {
 			patch: "/ping/{id}"
 			body: "*"
 		};
 	}
 
-	rpc Delete(goms.GoMsEntityRequest) returns (goms.GoMsResponse) {
+	rpc Delete(abs.EntityRequest) returns (abs.Response) {
 		option (google.api.http) = {
 			delete: "/ping/{id}"
 		};
