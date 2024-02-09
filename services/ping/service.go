@@ -16,9 +16,9 @@ type Service struct {
 }
 
 // Instanciate the service without dependency because it's role of ServiceFactory
-func NewService(name string, config core.ServiceConfig) *Service {
+func NewService(ctx *core.Context, name string, config core.ServiceConfig) *Service {
 	s := &Service{
-		Service: abs.NewService(name, config),
+		Service: abs.NewService(ctx, name, config),
 	}
 
 	return s
@@ -26,7 +26,7 @@ func NewService(name string, config core.ServiceConfig) *Service {
 
 // This method is required for redister your service on the Http server
 func (o *Service) RegisterHttp(gh *core.GoMsHttpServer, endpoint string) error {
-	return pb.RegisterPingHandlerFromEndpoint(gh.Ctx, gh.Mux, endpoint, gh.Grpc.Opts)
+	return pb.RegisterPingHandlerFromEndpoint(gh.Ctx.Main, gh.Mux, endpoint, gh.Grpc.Opts)
 }
 
 // This method is required for redister your service on the Grpc server
