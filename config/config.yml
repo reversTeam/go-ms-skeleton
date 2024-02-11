@@ -1,14 +1,17 @@
+name: skeleton
 grpc:
   host: "127.0.0.1"
   port: 42001
 http:
-  host: "127.0.0.1"
+  host: "0.0.0.0"
   port: 8080
 exporter:
   host: "127.0.0.1"
   port: 4242
   path: "/metrics"
   interval: 1
+middlewares:
+  - TestMiddleware
 services:
   abs:
     http: true
@@ -28,8 +31,23 @@ services:
       database:
         host: 127.0.0.1
         port: 5432
+      middlewares:
+        List:
+          - AuthMiddleware
+          - TestMiddleware
+        Create:
+          - ValidationMiddleware
+          - RateLimitMiddleware
+          - AuthMiddleware
+        Get:
+          - AuthMiddleware
+        Update:
+          - ValidationMiddleware
+          - AuthMiddleware
+        Delete:
+          - AuthMiddleware
+
 jaeger:
-  name: skeleton
   unsecure: true
   mode: http
   host: 127.0.0.1
