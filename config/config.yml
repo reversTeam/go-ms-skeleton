@@ -34,11 +34,11 @@ services:
         port: 9042
       middlewares:
         List:
-          # - AuthMiddleware
-          # - TestMiddleware
+          - AuthMiddleware
+          - TestMiddleware
         Get:
-          # - AuthMiddleware
-          # - TestMiddleware
+          - AuthMiddleware
+          - TestMiddleware
   ping:
     http: true
     config:

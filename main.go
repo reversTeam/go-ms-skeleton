@@ -12,7 +12,6 @@ import (
 	"github.com/reversTeam/go-ms-tools/services/child"
 	"github.com/reversTeam/go-ms-tools/services/people"
 	"github.com/reversTeam/go-ms/core"
-	"google.golang.org/grpc"
 )
 
 const (
@@ -23,10 +22,16 @@ var (
 	configFilePath = flag.String("config", GO_MS_CONFIG_FILEPATH, "yaml config filepath")
 )
 
-func testMiddleware(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
+type TestMiddleware struct {
+	core.BaseMiddleware
+}
+
+func (t *TestMiddleware) Apply(ctx context.Context, req interface{}) (context.Context, interface{}, error) {
 	fmt.Println("TEST MIDDLEWARE IS APPLIED")
 
-	return handler(ctx, req)
+	// Puisque ce middleware ne modifie ni le contexte, ni la requête, et ne retourne pas d'erreur,
+	// nous retournons simplement les paramètres inchangés avec nil pour l'erreur.
+	return ctx, req, nil
 }
 
 var goMsServices = map[string]core.GoMsServiceFunc{
@@ -43,9 +48,9 @@ var goMsServices = map[string]core.GoMsServiceFunc{
 		return people.NewService(ctx, name, config)
 	}),
 }
-var goMsMiddleWare = map[string]core.GoMsMiddlewareFunc{
-	"AuthMiddleware": middlewares.AuthMiddleware,
-	"TestMiddleware": testMiddleware,
+var goMsMiddleWare = map[string]core.Middleware{
+	"AuthMiddleware": &middlewares.AuthMiddleware{},
+	"TestMiddleware": &TestMiddleware{},
 }
 
 func main() {
