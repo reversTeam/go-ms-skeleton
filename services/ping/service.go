@@ -1,6 +1,8 @@
 package ping
 
 import (
+	"log"
+
 	"github.com/golang/protobuf/ptypes/empty"
 	pb "github.com/reversTeam/go-ms-skeleton/services/ping/protobuf"
 	"github.com/reversTeam/go-ms-tools/services/abs"
@@ -38,6 +40,7 @@ func (o *Service) RegisterGrpc(gs *core.GoMsGrpcServer) {
 //   - grpc : List
 //   - http : Get /ping
 func (o *Service) List(ctx context.Context, in *empty.Empty) (*pbAbs.Response, error) {
+	log.Println("IN PING LIST")
 	return &pbAbs.Response{
 		Message: "Ping List",
 	}, nil

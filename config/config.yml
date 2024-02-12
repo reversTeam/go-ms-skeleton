@@ -25,6 +25,20 @@ services:
       database:
         host: 127.0.0.1
         port: 5432
+  people:
+    http: true
+    config:
+      database:
+        keyspace: glb
+        host: 127.0.0.1
+        port: 9042
+      middlewares:
+        List:
+          - AuthMiddleware
+          - TestMiddleware
+        Get:
+          - AuthMiddleware
+          - TestMiddleware
   ping:
     http: true
     config:
