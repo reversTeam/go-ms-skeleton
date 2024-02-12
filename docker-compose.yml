@@ -11,3 +11,26 @@ services:
       - "4318:4318" # OTLP HTTP
     environment:
       - COLLECTOR_ZIPKIN_HTTP_PORT=9411
+
+  scylla:
+    image: scylladb/scylla:latest
+    container_name: scylladb
+    ports:
+      - "9042:9042" # Port CQL natif pour les connexions clients
+      - "9180:9180" # Port de l'API HTTP
+    entrypoint: "/start.sh"
+    healthcheck:
+      test: [ "CMD", "nodetool", "status" ]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    volumes:
+      - ./data/scylla/start.sh:/start.sh
+      - ./data/scylla/config.yml:/config.yml
+      - ./data/scylla/init-script.sh:/docker-entrypoint-initdb.d/init-script.sh
+      - ./data/scylla/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+
+#       - scylla_data:/var/lib/scylla # Persistance des données
+
+# volumes:
+#   scylla_data:

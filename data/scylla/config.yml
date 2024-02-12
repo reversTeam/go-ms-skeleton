@@ -1,0 +1,43 @@
+# Chemin vers le répertoire de données de ScyllaDB
+data_file_directories:
+  - /var/lib/scylla/data
+
+# Chemin vers le répertoire de commitlog
+commitlog_directory: /var/lib/scylla/commitlog
+
+# Chemin vers le répertoire de sauvegardes (snapshots)
+hints_directory: /var/lib/scylla/hints
+
+# Chemin vers le répertoire de sauvegardes temporaires
+view_hints_directory: /var/lib/scylla/view_hints
+
+# Configuration du cluster
+cluster_name: 'Test Cluster'
+
+# Initialisation du token pour ce nœud
+initial_token: null
+
+# Adresses IP des nœuds seed
+seed_provider:
+  - class_name: org.apache.cassandra.locator.SimpleSeedProvider
+    parameters:
+        - seeds: "172.17.0.2"
+
+# Adresse IP sur laquelle écouter les connexions client
+listen_address: 0.0.0.0
+
+# Adresse IP à utiliser pour se connecter à d'autres nœuds du cluster
+broadcast_address: 172.17.0.2
+
+# Adresse IP sur laquelle écouter les connexions CQL
+rpc_address: 0.0.0.0
+
+# Adresse IP à annoncer aux clients
+broadcast_rpc_address: 172.17.0.2
+
+# Configuration du port
+native_transport_port: 9042
+
+# Activation du mode développeur (ne doit pas être utilisé en production)
+developer_mode: true
+

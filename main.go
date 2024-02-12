@@ -10,6 +10,7 @@ import (
 	"github.com/reversTeam/go-ms-tools/middlewares"
 	"github.com/reversTeam/go-ms-tools/services/abs"
 	"github.com/reversTeam/go-ms-tools/services/child"
+	"github.com/reversTeam/go-ms-tools/services/people"
 	"github.com/reversTeam/go-ms/core"
 	"google.golang.org/grpc"
 )
@@ -37,6 +38,9 @@ var goMsServices = map[string]core.GoMsServiceFunc{
 	}),
 	"ping": core.RegisterServiceMap(func(ctx *core.Context, name string, config core.ServiceConfig) core.GoMsServiceInterface {
 		return ping.NewService(ctx, name, config)
+	}),
+	"people": core.RegisterServiceMap(func(ctx *core.Context, name string, config core.ServiceConfig) core.GoMsServiceInterface {
+		return people.NewService(ctx, name, config)
 	}),
 }
 var goMsMiddleWare = map[string]core.GoMsMiddlewareFunc{
