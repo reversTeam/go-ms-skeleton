@@ -25,8 +25,10 @@ require (
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/gocql/gocql v1.6.0 // indirect
 	github.com/golang/snappy v0.0.3 // indirect
+	github.com/google/uuid v1.6.0 // indirect
 	github.com/hailocab/go-hostpool v0.0.0-20160125115350-e80d13ce29ed // indirect
 	github.com/matttproud/golang_protobuf_extensions/v2 v2.0.0 // indirect
+	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/prometheus/client_golang v1.18.0 // indirect
 	github.com/prometheus/client_model v0.5.0 // indirect
 	github.com/prometheus/common v0.45.0 // indirect
