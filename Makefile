@@ -6,6 +6,7 @@ lint:
 
 install:
 	go get ./...
+	go mod tidy
 
 protogen:
 	@for proto in services/**/protobuf/*.proto ; do \

@@ -5,8 +5,8 @@ go 1.20
 require (
 	github.com/golang/protobuf v1.5.3
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.19.1
-	github.com/reversTeam/go-ms v0.0.0-20240204105559-92b71529fd50
-	github.com/reversTeam/go-ms-tools v0.0.0-20240206111318-89acfe3c0998
+	github.com/reversTeam/go-ms v0.0.0-20240213130233-45e427e345b4
+	github.com/reversTeam/go-ms-tools v0.0.0-20240213130209-1f8f9a77a855
 	golang.org/x/net v0.20.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20240125205218-1f4bbc51befe
 	google.golang.org/grpc v1.61.0
@@ -25,7 +25,6 @@ require (
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/gocql/gocql v1.6.0 // indirect
 	github.com/golang/snappy v0.0.3 // indirect
-	github.com/google/uuid v1.6.0 // indirect
 	github.com/hailocab/go-hostpool v0.0.0-20160125115350-e80d13ce29ed // indirect
 	github.com/matttproud/golang_protobuf_extensions/v2 v2.0.0 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
