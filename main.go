@@ -11,6 +11,7 @@ import (
 	"github.com/reversTeam/go-ms-tools/services/abs"
 	"github.com/reversTeam/go-ms-tools/services/child"
 	"github.com/reversTeam/go-ms-tools/services/people"
+	"github.com/reversTeam/go-ms-tools/services/signin"
 	"github.com/reversTeam/go-ms/core"
 )
 
@@ -29,8 +30,6 @@ type TestMiddleware struct {
 func (t *TestMiddleware) Apply(ctx context.Context, req interface{}) (context.Context, interface{}, error) {
 	fmt.Println("TEST MIDDLEWARE IS APPLIED")
 
-	// Puisque ce middleware ne modifie ni le contexte, ni la requête, et ne retourne pas d'erreur,
-	// nous retournons simplement les paramètres inchangés avec nil pour l'erreur.
 	return ctx, req, nil
 }
 
@@ -47,10 +46,14 @@ var goMsServices = map[string]core.GoMsServiceFunc{
 	"people": core.RegisterServiceMap(func(ctx *core.Context, name string, config core.ServiceConfig) core.GoMsServiceInterface {
 		return people.NewService(ctx, name, config)
 	}),
+	"signin": core.RegisterServiceMap(func(ctx *core.Context, name string, config core.ServiceConfig) core.GoMsServiceInterface {
+		return signin.NewService(ctx, name, config)
+	}),
 }
 var goMsMiddleWare = map[string]core.Middleware{
-	"AuthMiddleware": &middlewares.AuthMiddleware{},
-	"TestMiddleware": &TestMiddleware{},
+	"AuthMiddleware":   &middlewares.AuthMiddleware{},
+	"UnAuthMiddleware": &middlewares.UnauthenticatedMiddleware{},
+	"TestMiddleware":   &TestMiddleware{},
 }
 
 func main() {

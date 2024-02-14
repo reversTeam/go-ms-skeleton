@@ -85,6 +85,7 @@ CREATE TABLE IF NOT EXISTS auth.signin (
     updated_at TIMESTAMP,
     status TEXT,
     expired_at TIMESTAMP,
+    validated_at TIMESTAMP,
     email TEXT,
     firstname TEXT,
     lastname TEXT,
