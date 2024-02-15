@@ -15,13 +15,27 @@ CREATE TABLE IF NOT EXISTS people (
     firstname varchar,
     lastname varchar,
     birthday date,
-    email_id uuid,
     PRIMARY KEY (id)
 );
 
 CREATE INDEX ON people (status);
 
-CREATE TABLE IF NOT EXISTS global.email (
+CREATE TABLE IF NOT EXISTS email (
+    people_id uuid,
+    email varchar,
+    created_at timestamp,
+    updated_at timestamp,
+    status varchar,
+    validated_at timestamp,
+    expired_at timestamp,
+    PRIMARY KEY (people_id, email)
+);
+
+CREATE INDEX ON email (status);
+
+USE auth;
+
+CREATE TABLE IF NOT EXISTS account (
     people_id uuid,
     created_at timestamp,
     updated_at timestamp,
@@ -29,25 +43,12 @@ CREATE TABLE IF NOT EXISTS global.email (
     validated_at timestamp,
     expired_at timestamp,
     email varchar,
-    PRIMARY KEY (people_id, email)
-);
-
-CREATE INDEX ON global.email (status);
-
-USE auth;
-
-CREATE TABLE IF NOT EXISTS auth.account (
-    people_id uuid,
-    created_at timestamp,
-    updated_at timestamp,
-    status varchar,
-    validated_at timestamp,
-    expired_at timestamp,
     password varchar,
     signin_id uuid,
     PRIMARY KEY (people_id)
 );
 
+CREATE INDEX ON account (email);
 CREATE INDEX ON account (signin_id);
 CREATE INDEX ON account (status);
 
@@ -72,7 +73,7 @@ CREATE TABLE IF NOT EXISTS password_reset_request (
     status varchar,
     expired_at timestamp,
     reset_token varchar,
-    email_id uuid,
+    email uuid,
     PRIMARY KEY (account_id, email_id)
 );
 CREATE INDEX ON password_reset_request (status);
@@ -91,7 +92,6 @@ CREATE TABLE IF NOT EXISTS auth.signin (
     password TEXT,
     validation_token TEXT,
     account_id uuid,
-    email_id uuid,
     PRIMARY KEY (id)
 );
 

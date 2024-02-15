@@ -35,8 +35,9 @@ var goMsServices = map[string]core.GoMsServiceFunc{
 	}),
 }
 var goMsMiddleWare = map[string]core.Middleware{
-	"AuthMiddleware":   &middlewares.AuthMiddleware{},
-	"UnAuthMiddleware": &middlewares.UnauthenticatedMiddleware{},
+	"CheckParametersMiddleware": middlewares.NewCheckParametersMiddleware(),
+	"AuthMiddleware":            &middlewares.AuthMiddleware{},
+	"UnAuthMiddleware":          &middlewares.UnauthenticatedMiddleware{},
 }
 
 func main() {

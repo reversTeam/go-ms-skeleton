@@ -24,8 +24,10 @@ services:
             port: 9042
       middlewares:
         Register:
+          - CheckParametersMiddleware
           - UnAuthMiddleware
         Validate:
+          - CheckParametersMiddleware
           - UnAuthMiddleware
   people:
     http: true
@@ -36,6 +38,11 @@ services:
             host: 127.0.0.1
             port: 9042
       middlewares:
+        Create:
+          - CheckParametersMiddleware
+          # - AuthMiddleware
+        Update:
+          - CheckParametersMiddleware
         List:
           - AuthMiddleware
         Get:
@@ -51,6 +58,11 @@ services:
           auth:
             host: 127.0.0.1
             port: 9042
+      middlewares:
+        Create:
+          - CheckParametersMiddleware
+        Update:
+          - CheckParametersMiddleware
   email:
     http: false
     config:
@@ -62,6 +74,11 @@ services:
           auth:
             host: 127.0.0.1
             port: 9042
+      middlewares:
+        Create:
+          - CheckParametersMiddleware
+        Update:
+          - CheckParametersMiddleware
 
 jaeger:
   unsecure: true

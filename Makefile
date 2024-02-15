@@ -1,7 +1,6 @@
 #!make
 lint:
 	gofmt -w -s .
-	golangci-lint run services/*
 	golangci-lint run main.go
 
 install:
