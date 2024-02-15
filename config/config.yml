@@ -10,36 +10,7 @@ exporter:
   port: 4242
   path: "/metrics"
   interval: 1
-middlewares:
-  - TestMiddleware
 services:
-  abs:
-    http: true
-    config:
-      database:
-        host: 127.0.0.1
-        port: 3306
-  child:
-    http: true
-    config:
-      database:
-        host: 127.0.0.1
-        port: 5432
-  people:
-    http: true
-    config:
-      databases:
-        scylla:
-          global:
-            host: 127.0.0.1
-            port: 9042
-      middlewares:
-        List:
-          - AuthMiddleware
-          - TestMiddleware
-        Get:
-          - AuthMiddleware
-          - TestMiddleware
   signin:
     http: true
     config:
@@ -56,8 +27,21 @@ services:
           - UnAuthMiddleware
         Validate:
           - UnAuthMiddleware
-  account:
+  people:
     http: true
+    config:
+      databases:
+        scylla:
+          global:
+            host: 127.0.0.1
+            port: 9042
+      middlewares:
+        List:
+          - AuthMiddleware
+        Get:
+          - AuthMiddleware
+  account:
+    http: false
     config:
       databases:
         scylla:
@@ -68,7 +52,7 @@ services:
             host: 127.0.0.1
             port: 9042
   email:
-    http: true
+    http: false
     config:
       databases:
         scylla:
@@ -78,27 +62,6 @@ services:
           auth:
             host: 127.0.0.1
             port: 9042
-  ping:
-    http: true
-    config:
-      database:
-        host: 127.0.0.1
-        port: 5432
-      middlewares:
-        List:
-          - AuthMiddleware
-          - TestMiddleware
-        Create:
-          - ValidationMiddleware
-          - RateLimitMiddleware
-          - AuthMiddleware
-        Get:
-          - AuthMiddleware
-        Update:
-          - ValidationMiddleware
-          - AuthMiddleware
-        Delete:
-          - AuthMiddleware
 
 jaeger:
   unsecure: true
