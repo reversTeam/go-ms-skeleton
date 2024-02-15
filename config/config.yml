@@ -1,30 +1,34 @@
 name: skeleton
 grpc:
-  host: "127.0.0.1"
+  host: 127.0.0.1
   port: 42001
 http:
-  host: "0.0.0.0"
+  host: 0.0.0.0
   port: 8080
 exporter:
-  host: "127.0.0.1"
+  host: 127.0.0.1
   port: 4242
   path: "/metrics"
   interval: 1
-middlewares:
-  - TestMiddleware
 services:
-  abs:
+  signin:
     http: true
     config:
-      database:
-        host: 127.0.0.1
-        port: 3306
-  child:
-    http: true
-    config:
-      database:
-        host: 127.0.0.1
-        port: 5432
+      databases:
+        scylla:
+          global:
+            host: 127.0.0.1
+            port: 9042
+          auth:
+            host: 127.0.0.1
+            port: 9042
+      middlewares:
+        Register:
+          - CheckParametersMiddleware
+          - UnAuthMiddleware
+        Validate:
+          - CheckParametersMiddleware
+          - UnAuthMiddleware
   people:
     http: true
     config:
@@ -34,33 +38,47 @@ services:
             host: 127.0.0.1
             port: 9042
       middlewares:
-        List:
-          - AuthMiddleware
-          - TestMiddleware
-        Get:
-          - AuthMiddleware
-          - TestMiddleware
-  ping:
-    http: true
-    config:
-      database:
-        host: 127.0.0.1
-        port: 5432
-      middlewares:
-        List:
-          - AuthMiddleware
-          - TestMiddleware
         Create:
-          - ValidationMiddleware
-          - RateLimitMiddleware
+          - CheckParametersMiddleware
+          # - AuthMiddleware
+        Update:
+          - CheckParametersMiddleware
+        List:
           - AuthMiddleware
         Get:
           - AuthMiddleware
+  account:
+    http: false
+    config:
+      databases:
+        scylla:
+          global:
+            host: 127.0.0.1
+            port: 9042
+          auth:
+            host: 127.0.0.1
+            port: 9042
+      middlewares:
+        Create:
+          - CheckParametersMiddleware
         Update:
-          - ValidationMiddleware
-          - AuthMiddleware
-        Delete:
-          - AuthMiddleware
+          - CheckParametersMiddleware
+  email:
+    http: false
+    config:
+      databases:
+        scylla:
+          global:
+            host: 127.0.0.1
+            port: 9042
+          auth:
+            host: 127.0.0.1
+            port: 9042
+      middlewares:
+        Create:
+          - CheckParametersMiddleware
+        Update:
+          - CheckParametersMiddleware
 
 jaeger:
   unsecure: true
