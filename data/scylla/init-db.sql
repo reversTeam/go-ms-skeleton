@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS people (
 
 CREATE INDEX ON people (status);
 
-CREATE TABLE IF NOT EXISTS email (
+CREATE TABLE IF NOT EXISTS global.email (
     people_id uuid,
     created_at timestamp,
     updated_at timestamp,
@@ -32,24 +32,22 @@ CREATE TABLE IF NOT EXISTS email (
     PRIMARY KEY (people_id, email)
 );
 
-CREATE INDEX ON email (status);
+CREATE INDEX ON global.email (status);
 
 USE auth;
 
-CREATE TABLE IF NOT EXISTS account (
-    people_id uuid
+CREATE TABLE IF NOT EXISTS auth.account (
+    people_id uuid,
     created_at timestamp,
     updated_at timestamp,
     status varchar,
     validated_at timestamp,
     expired_at timestamp,
     password varchar,
-    email_id uuid,
     signin_id uuid,
     PRIMARY KEY (people_id)
 );
 
-CREATE INDEX ON account (email_id);
 CREATE INDEX ON account (signin_id);
 CREATE INDEX ON account (status);
 

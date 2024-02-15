@@ -56,6 +56,28 @@ services:
           - UnAuthMiddleware
         Validate:
           - UnAuthMiddleware
+  account:
+    http: true
+    config:
+      databases:
+        scylla:
+          global:
+            host: 127.0.0.1
+            port: 9042
+          auth:
+            host: 127.0.0.1
+            port: 9042
+  email:
+    http: true
+    config:
+      databases:
+        scylla:
+          global:
+            host: 127.0.0.1
+            port: 9042
+          auth:
+            host: 127.0.0.1
+            port: 9042
   ping:
     http: true
     config:

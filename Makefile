@@ -5,6 +5,8 @@ lint:
 	golangci-lint run main.go
 
 install:
+	go get github.com/favadi/protoc-go-inject-tag@latest
+	go install github.com/favadi/protoc-go-inject-tag@latest
 	go get ./...
 	go mod tidy
 
@@ -36,6 +38,8 @@ protogen:
 			exit 1; \
 		fi; \
 	done
+	@echo "Processing protoc-inject-tag";
+	@protoc-go-inject-tag --input="services/*/protobuf/*.pb.go"
 
 clean:
 	rm services/**/protobuf/*.pb.go || true

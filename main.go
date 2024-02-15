@@ -9,7 +9,9 @@ import (
 	"github.com/reversTeam/go-ms-skeleton/services/ping"
 	"github.com/reversTeam/go-ms-tools/middlewares"
 	"github.com/reversTeam/go-ms-tools/services/abs"
+	"github.com/reversTeam/go-ms-tools/services/account"
 	"github.com/reversTeam/go-ms-tools/services/child"
+	"github.com/reversTeam/go-ms-tools/services/email"
 	"github.com/reversTeam/go-ms-tools/services/people"
 	"github.com/reversTeam/go-ms-tools/services/signin"
 	"github.com/reversTeam/go-ms/core"
@@ -48,6 +50,12 @@ var goMsServices = map[string]core.GoMsServiceFunc{
 	}),
 	"signin": core.RegisterServiceMap(func(ctx *core.Context, name string, config core.ServiceConfig) core.GoMsServiceInterface {
 		return signin.NewService(ctx, name, config)
+	}),
+	"account": core.RegisterServiceMap(func(ctx *core.Context, name string, config core.ServiceConfig) core.GoMsServiceInterface {
+		return account.NewService(ctx, name, config)
+	}),
+	"email": core.RegisterServiceMap(func(ctx *core.Context, name string, config core.ServiceConfig) core.GoMsServiceInterface {
+		return email.NewService(ctx, name, config)
 	}),
 }
 var goMsMiddleWare = map[string]core.Middleware{
