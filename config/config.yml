@@ -46,6 +46,7 @@ services:
         List:
           - AuthMiddleware
         Get:
+          - CheckParametersMiddleware
           - AuthMiddleware
   account:
     http: false
